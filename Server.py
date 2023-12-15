@@ -105,14 +105,17 @@ class VNCServer(QtWidgets.QMainWindow):
                 'mouse_right_click', 'mouse_double_left_click']
 
         # В случае если это не скрин, пропускаем шаг
-        if screen_value[0] not in data:
-            decrypt_image = base64.b64decode(screen_value[0])
-            with open('2.png', 'wb') as file:
-                file.write(decrypt_image)
+        try:
+            if screen_value[0] not in data:
+                decrypt_image = base64.b64decode(screen_value[0])
+                with open('2.png', 'wb') as file:
+                    file.write(decrypt_image)
 
-            # Выводим изображение в панель
-            image = QtGui.QPixmap('2.png')
-            self.ui.label.setPixmap(image)
+                # Выводим изображение в панель
+                image = QtGui.QPixmap('2.png')
+                self.ui.label.setPixmap(image)
+        except:
+            pass
 
 
     # После закрытия сервера удаляем изображения
