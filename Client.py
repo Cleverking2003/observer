@@ -13,8 +13,10 @@ class VNCClient:
         while True:
             try:
                 self.client.connect((ip, port))
+                print(self.client.getsockname())
                 break
             except:
+                print(123)
                 time.sleep(5)
 
 
@@ -41,8 +43,6 @@ class VNCClient:
         os.remove('1.png')
         return reader
 
-
-
     # Обработка входящих команд
     def execute_handler(self):
         while True:
@@ -53,8 +53,6 @@ class VNCClient:
                 result = self.mouse_active(responce[0], responce[1], responce[2])
             self.send_json(result)
 
-
-
     # Отправляем json данные серверу
     def send_json(self, data):
         # Если данные окажутся строкой
@@ -64,8 +62,6 @@ class VNCClient:
             json_data = json.dumps(data) 
         #print(json_data)
         self.client.send(json_data.encode('utf-8'))
-
-
 
     # Получаем json данные от сервера
     def receive_json(self):

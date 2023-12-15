@@ -25,8 +25,8 @@ class MyThread(QtCore.QThread):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((self.ip, self.port))
+        #print(socket.gethostbyname_ex(socket.gethostname()))
         self.server.listen(0)
-        print(self.server.getsockname())
 
         
     # Принимаем и обрабатываем изображение
@@ -75,6 +75,8 @@ class MyThread(QtCore.QThread):
             except ValueError:
                 pass
 
+    def quit(self):
+        self.server.close()
 
 
 
