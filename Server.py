@@ -1,13 +1,11 @@
-import os
-import sys
-import json
-import glob
-import time
 import base64
-from PyQt5 import QtCore, QtGui, QtWidgets
-import pyautogui
-from GUI import *
+import glob
+import json
+import os
 import socket
+import sys
+
+from GUI import *
 
 
 class MyThread(QtCore.QThread):
@@ -41,7 +39,7 @@ class MyThread(QtCore.QThread):
                 responce = self.receive_json()
                 self.mysignal.emit([responce])
                 self.command = 'screen'
-            if self.command.split(' ')[0] == 'screen':
+            else:
                 self.send_json(self.command.split(' '))
                 responce = self.receive_json()
                 self.mysignal.emit([responce])
